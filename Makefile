@@ -6,3 +6,6 @@ start:
 
 test:
 	cd gm && npm test
+
+build:
+	cd gm && npm run build -- --outDir ../docs
