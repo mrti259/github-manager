@@ -3,6 +3,7 @@ import { defineConfig } from 'vite';
 import GithubActionsReporter from 'vitest-github-actions-reporter-temp'
 
 export default defineConfig({
+	base: '/github-manager/',
 	plugins: [imba()],
 	define: {
 		'import.meta.vitest': 'undefined',
