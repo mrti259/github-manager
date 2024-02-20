@@ -13,11 +13,22 @@ export class GithubClient
 		const pages = _getPages options.page, response
 		return {ok, repos, pages}
 	
-	def updateRepo fullName, options
-		const response = await _request "PATCH", "repos/{fullName}", JSON.stringify(options)
+	def updateRepo repo, options
+		const response = await _request "PATCH", "repos/{repo.full_name}", JSON.stringify(options)
 	
-	def deleteRepo fullName
-		const response = await _request "DELETE", "repos/{fullName}"
+	def deleteRepo repo
+		const response = await _request "DELETE", "repos/{repo.full_name}"
+	
+	def getGists options
+		const query = new URLSearchParams options
+		const response = await _request "GET", "gists?{query}"
+		const ok = response.ok
+		const gists = await response.json!
+		const pages = _getPages options.page, response
+		return {ok, gists, pages}
+	
+	def deleteGist gist
+		const response = await _request "DELETE", "gists/{gist.id}"
 	
 	def _getPages page, response
 		const linkHeader = response.headers.get("link") || ""
@@ -32,7 +43,7 @@ export class GithubClient
 			pages.push newPage
 		pages.sort!
 	
-	def _request method, path, body
+	def _request method, path, body=undefined
 		const headers = {
 			"Accept": "application/vnd.github+json"
 			"X-GitHub-Api-Version": "2022-11-28"
