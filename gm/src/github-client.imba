@@ -35,11 +35,9 @@ export class GithubClient
 		const pages = [page]
 		for link in linkHeader.split ","
 			const match = link.match /page=(\d+)/
-			if !match
-				continue
+			continue unless !match
 			const newPage = Number match[1]
-			if pages.includes newPage
-				continue
+			continue if pages.includes newPage
 			pages.push newPage
 		pages.sort!
 	

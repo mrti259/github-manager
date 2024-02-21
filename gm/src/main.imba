@@ -40,7 +40,7 @@ tag app
 			type: "gists"
 			description: "Delete"
 			filter: do(gist) yes
-			call: do(gist) client.deleteGist
+			call: do(gist) client.deleteGist gist
 	}
 
 	type = "repos"
