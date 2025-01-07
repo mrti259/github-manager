@@ -35,7 +35,7 @@ export class GithubClient
 		const pages = [page]
 		for link in linkHeader.split ","
 			const match = link.match /page=(\d+)/
-			continue unless !match
+			continue unless match
 			const newPage = Number match[1]
 			continue if pages.includes newPage
 			pages.push newPage
