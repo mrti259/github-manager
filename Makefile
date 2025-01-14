@@ -1,11 +1,13 @@
+NPM = cd app && npm
+
 install:
-	cd gm && npm install
+	$(NPM) install
 
 start:
-	cd gm && npm start
+	$(NPM) start
 
 test:
-	cd gm && npm test
+	$(NPM) test
 
 build:
-	cd gm && npm run build -- --outDir ../docs
+	$(NPM) run build -- --emptyOutDir --outDir ../docs
